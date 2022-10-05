@@ -8,7 +8,7 @@
 #include<algorithm>
 
 using namespace std;
-
+#pragma region completedSolutions
 bool isHappy(int n) { // https://leetcode.com/problems/happy-number/
     int digitSum = 0;
     int num = n;
@@ -26,7 +26,6 @@ bool isHappy(int n) { // https://leetcode.com/problems/happy-number/
     }
     return true;
 }
-
 void isHappyImplementation(int dataSetSize) {
     for(int i = 0; i < dataSetSize; i++) {
         string happy = isHappy(i) ? " is happy!" : " sad";
@@ -34,6 +33,11 @@ void isHappyImplementation(int dataSetSize) {
     }
 }
 
+#pragma endregion
+
+vector<int> spiralOrder(vector<vector<int>>& matrix) {
+
+}
 int main() {
     isHappyImplementation(1000);
 }
