@@ -8,6 +8,18 @@
 #include<algorithm>
 
 using namespace std;
+
+#pragma region helperFunctions
+
+template <typename T>
+void swap(T* a, T* b) { // Helper function for reverseString
+    T tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
+#pragma endregion
+
 #pragma region completedSolutions
 bool isHappy(int n) { // https://leetcode.com/problems/happy-number/
     int digitSum = 0;
@@ -26,6 +38,7 @@ bool isHappy(int n) { // https://leetcode.com/problems/happy-number/
     }
     return true;
 }
+
 void isHappyImplementation(int dataSetSize) {
     for(int i = 0; i < dataSetSize; i++) {
         string happy = isHappy(i) ? " is happy!" : " sad";
@@ -33,11 +46,14 @@ void isHappyImplementation(int dataSetSize) {
     }
 }
 
+void reverseString(vector<char>& s) { //https://leetcode.com/problems/reverse-string/
+    for(int i = 0; i < s.size()/2; i++) {
+        swap(&s[i], &s[s.size() - i - 1]);
+    }
+}
 #pragma endregion
 
-vector<int> spiralOrder(vector<vector<int>>& matrix) {
 
-}
 int main() {
-    isHappyImplementation(1000);
+
 }
