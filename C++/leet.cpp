@@ -8,6 +8,13 @@
 #include<algorithm>
 
 using namespace std;
+#pragma region dataStructures
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+#pragma endregion
 
 #pragma region helperFunctions
 
@@ -51,6 +58,16 @@ void reverseString(vector<char>& s) { //https://leetcode.com/problems/reverse-st
         swap(&s[i], &s[s.size() - i - 1]);
     }
 }
+
+void deleteNode(ListNode* node) { // https://leetcode.com/problems/delete-node-in-a-linked-list/
+    node->val = node->next->val;
+    if(node->next->next == NULL){
+        node->next = NULL;
+        return;
+    }
+    return deleteNode(node->next);
+}
+
 #pragma endregion
 
 
