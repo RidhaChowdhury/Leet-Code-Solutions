@@ -68,6 +68,15 @@ void deleteNode(ListNode* node) { // https://leetcode.com/problems/delete-node-i
     return deleteNode(node->next);
 }
 
+vector<int> twoSum(vector<int>& nums, int target) { // https://leetcode.com/problems/two-sum/
+    unordered_map<int, int> numbers;
+    for(int i = 0; i < nums.size(); i++) {
+        if(numbers.count(target - nums[i])) return {i, numbers[target-nums[i]]};
+        else numbers[nums[i]] = i;
+    }
+    return {0,0};
+}
+
 #pragma endregion
 
 
