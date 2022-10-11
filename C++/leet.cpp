@@ -86,6 +86,18 @@ int finalValueAfterOperations(vector<string>& operations) { // https://leetcode.
     return x;
 }
 
+
+int removeDuplicates(vector<int>& nums) { // https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+    int last = 0;
+    for(int i = 1; i < nums.size(); i++) {
+        if(nums[last] != nums[i]) {
+            last++;
+            nums[last] = nums[i];
+        }
+    }
+    return last + 1;
+}
+
 #pragma endregion
 
 
