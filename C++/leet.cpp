@@ -77,6 +77,15 @@ vector<int> twoSum(vector<int>& nums, int target) { // https://leetcode.com/prob
     return {0,0};
 }
 
+int finalValueAfterOperations(vector<string>& operations) { // https://leetcode.com/problems/final-value-of-variable-after-performing-operations/
+    int x = 0;
+    for(string operation : operations) {
+        if(operation == "X++" || operation == "++X") x++;
+        else x--;
+    }
+    return x;
+}
+
 #pragma endregion
 
 
