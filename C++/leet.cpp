@@ -14,6 +14,13 @@ struct ListNode {
     ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
 };
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
 #pragma endregion
 
 #pragma region helperFunctions
@@ -96,6 +103,11 @@ int removeDuplicates(vector<int>& nums) { // https://leetcode.com/problems/remov
         }
     }
     return last + 1;
+}
+
+int maxDepth(TreeNode* root) { // https://leetcode.com/problems/maximum-depth-of-binary-tree/
+    if(root==NULL) return 0;
+    return max(maxDepth(root->left), maxDepth(root->right)) + 1;
 }
 
 #pragma endregion
