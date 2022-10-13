@@ -110,6 +110,11 @@ int maxDepth(TreeNode* root) { // https://leetcode.com/problems/maximum-depth-of
     return max(maxDepth(root->left), maxDepth(root->right)) + 1;
 }
 
+int smallestEvenMultiple(int n) { // https://leetcode.com/problems/smallest-even-multiple/
+    if(n % 2 == 0) return n;
+    return 2*n;
+}
+
 #pragma endregion
 
 
