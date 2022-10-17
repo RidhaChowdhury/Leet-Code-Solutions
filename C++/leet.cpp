@@ -131,6 +131,15 @@ vector<int> inorderTraversal(TreeNode* root) { // https://leetcode.com/problems/
     return inorder;
 }
 
+vector<int> shuffle(vector<int>& nums, int n) { // https://leetcode.com/problems/shuffle-the-array/
+    vector<int> shuffled;
+    for(int i = 0; i < n; i++) {
+        shuffled.push_back(nums[i]);
+        shuffled.push_back(nums[i + n]);
+    }
+    return shuffled;
+}
+
 #pragma endregion
 
 
