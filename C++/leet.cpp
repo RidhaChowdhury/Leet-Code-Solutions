@@ -115,6 +115,22 @@ int smallestEvenMultiple(int n) { // https://leetcode.com/problems/smallest-even
     return 2*n;
 }
 
+vector<int> inorderTraversal(TreeNode* root) { // https://leetcode.com/problems/binary-tree-inorder-traversal/
+    if(root==nullptr) return {};
+    if(root->left == nullptr && root->right == nullptr) return {root->val};
+    vector<int> inorder;
+    if(root->left) {
+        vector<int> left = inorderTraversal(root->left);
+        if(root->left->val) inorder.insert(inorder.end(), left.begin(), left.end());
+    }
+    inorder.push_back(root->val);
+    if(root->right) {
+        vector<int> right = inorderTraversal(root->right);
+        if(root->right->val) inorder.insert(inorder.end(), right.begin(), right.end());
+    }
+    return inorder;
+}
+
 #pragma endregion
 
 
