@@ -150,6 +150,22 @@ int numIdenticalPairs(vector<int>& nums) { // https://leetcode.com/problems/numb
     return pairs;
 }
 
+ListNode* reverseListIterative(ListNode* head) { // https://leetcode.com/problems/reverse-linked-list/
+    if(head == nullptr || head->next == nullptr) return head;
+    ListNode* newHead = head->next;
+    ListNode* previous = head;
+    previous->next = nullptr;
+    while(newHead != nullptr) {
+        ListNode* buffer = newHead->next;
+        newHead->next = previous;
+        previous = newHead;
+        newHead = buffer;
+    }
+    return previous;
+}
+
+
+
 #pragma endregion
 
 
