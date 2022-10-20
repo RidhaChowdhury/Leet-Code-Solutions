@@ -164,7 +164,29 @@ ListNode* reverseListIterative(ListNode* head) { // https://leetcode.com/problem
     return previous;
 }
 
+int majorityElement(vector<int>& nums) { // https://leetcode.com/problems/majority-element/
+    /*unordered_map<int, int> frequency;
+    int majority = nums.size() / 2;
+    for(int num : nums) {
+        frequency[num]++;
+        if(frequency[num] > majority) return num;
+    }
 
+    return -1;*/
+
+    int frequency = 0, major = nums[0];
+    for(int n : nums) {
+        if(n == major) frequency++;
+        else {
+            frequency--;
+            if(frequency < 0) {
+                frequency = 1;
+                major = n;
+            }
+        }
+    }
+    return major;
+}
 
 #pragma endregion
 
