@@ -188,6 +188,17 @@ int majorityElement(vector<int>& nums) { // https://leetcode.com/problems/majori
     return major;
 }
 
+void moveZeroes(vector<int>& nums) { // https://leetcode.com/problems/move-zeroes/
+    int back = 0;
+    for(int i = 0; i< nums.size(); i++) {
+        if(nums[i] != 0) {
+            swap(nums[back], nums[i]);
+            back++;
+        }
+
+    }
+}
+
 #pragma endregion
 
 
