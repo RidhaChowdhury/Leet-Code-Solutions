@@ -199,6 +199,21 @@ void moveZeroes(vector<int>& nums) { // https://leetcode.com/problems/move-zeroe
     }
 }
 
+int numJewelsInStones(string jewels, string stones) { // https://leetcode.com/problems/jewels-and-stones/
+    unordered_map<char, bool> jewelMap;
+
+    for(char jewel : jewels) {
+        jewelMap[jewel] = true;
+    }
+
+    int sum = 0;
+    for(char stone : stones) {
+        if(jewelMap[stone]) sum++;
+    }
+
+    return sum;
+}
+
 #pragma endregion
 
 
