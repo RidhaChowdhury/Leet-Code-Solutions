@@ -214,6 +214,23 @@ int numJewelsInStones(string jewels, string stones) { // https://leetcode.com/pr
     return sum;
 }
 
+class ParkingSystem { // https://leetcode.com/problems/design-parking-system/
+public:
+    int spots[3] = {};
+    ParkingSystem(int big, int medium, int small) {
+        spots[0] = big;
+        spots[1] = medium;
+        spots[2] = small;
+    }
+
+    bool addCar(int carType) {
+        carType--;
+        if(spots[carType] == 0) return false;
+        spots[carType]--;
+        return true;
+    }
+};
+
 #pragma endregion
 
 
