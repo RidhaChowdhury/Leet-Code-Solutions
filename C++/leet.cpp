@@ -231,6 +231,34 @@ public:
     }
 };
 
+int maximum69Number(int num) { // https://leetcode.com/problems/maximum-69-number/
+    int* digits = new int[6];
+    int currentDigit = 0;
+    int baseNum = num;
+    int maxNumber = num;
+    while(num != 0) {
+        digits[currentDigit] = num % 10;
+        num /= 10;
+        currentDigit++;
+    }
+
+    for(int i = 0; i < currentDigit; i++) {
+        if(digits[i] == 6) {
+            int number = 0;
+            bool swapUsed = false;
+            for(int j = currentDigit - 1; j >= 0; j--) {
+                number *= 10;
+                if(j!=i) number += digits[j];
+                else number += 9;
+            }
+            if(number > maxNumber) maxNumber = number;
+        }
+    }
+    return maxNumber;
+}
+
+
+
 #pragma endregion
 
 
