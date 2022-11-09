@@ -257,11 +257,16 @@ int maximum69Number(int num) { // https://leetcode.com/problems/maximum-69-numbe
     return maxNumber;
 }
 
-
+int subtractProductAndSum(int n) {
+    int product = n % 10;
+    int sum = n % 10;
+    n /= 10;
+    while(n!=0) {
+        product *= n % 10;
+        sum += n % 10;
+        n /= 10;
+    }
+    return product - sum;
+}
 
 #pragma endregion
-
-
-int main() {
-
-}
