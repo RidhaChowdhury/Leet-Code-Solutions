@@ -257,7 +257,7 @@ int maximum69Number(int num) { // https://leetcode.com/problems/maximum-69-numbe
     return maxNumber;
 }
 
-int subtractProductAndSum(int n) {
+int subtractProductAndSum(int n) { // https://leetcode.com/problems/subtract-the-product-and-sum-of-digits-of-an-integer/
     int product = n % 10;
     int sum = n % 10;
     n /= 10;
