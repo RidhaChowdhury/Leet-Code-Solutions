@@ -269,4 +269,10 @@ int subtractProductAndSum(int n) { // https://leetcode.com/problems/subtract-the
     return product - sum;
 }
 
+vector<int> runningSum(vector<int>& nums) { // https://leetcode.com/problems/running-sum-of-1d-array/
+    for(int index = 1; index < nums.size(); index++)
+        nums[index] += nums[index - 1];
+    return nums;
+}
+
 #pragma endregion
