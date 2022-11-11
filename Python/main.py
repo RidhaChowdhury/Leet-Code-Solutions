@@ -7,3 +7,13 @@ def makeGood(self, s: str) -> str: #https://leetcode.com/problems/make-the-strin
                 characters.append(character)
             
         return "".join(characters) 
+
+def pivotIndex(self, nums: List[int]) -> int:
+        left, right = 0, sum(nums)
+        for index, value in enumerate(nums):
+            left += value
+            if left == right:
+                return index
+            right -= value
+        return -1
+        
