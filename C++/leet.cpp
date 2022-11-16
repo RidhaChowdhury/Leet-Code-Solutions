@@ -275,4 +275,8 @@ vector<int> runningSum(vector<int>& nums) { // https://leetcode.com/problems/run
     return nums;
 }
 
+vector<double> convertTemperature(double celsius) { // https://leetcode.com/problems/convert-the-temperature/
+    return {celsius + 273.15, celsius * 1.80 + 32.00};
+}
+
 #pragma endregion
