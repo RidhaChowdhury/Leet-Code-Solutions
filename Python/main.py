@@ -8,7 +8,7 @@ def makeGood(self, s: str) -> str: #https://leetcode.com/problems/make-the-strin
             
         return "".join(characters) 
 
-def pivotIndex(self, nums: List[int]) -> int:
+def pivotIndex(self, nums) -> int:
         left, right = 0, sum(nums)
         for index, value in enumerate(nums):
             left += value
