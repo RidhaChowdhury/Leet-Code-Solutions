@@ -17,3 +17,5 @@ def pivotIndex(self, nums: List[int]) -> int:
             right -= value
         return -1
         
+def defangIPaddr(self, address: str) -> str:                
+    return address.replace(".", "[.]")
