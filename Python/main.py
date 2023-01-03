@@ -25,3 +25,16 @@ def singleNumber(self, nums: List[int]) -> int:
     for num in nums[1:]:
         result ^= num
     return result
+
+def containsDuplicate(self, nums: List[int]) -> bool:
+    # create a hashset
+    seen = set()
+    # loop through each value
+    for num in nums:
+        # if the value is in the set then this list contains duplicate
+        if num in seen:
+            return True
+        # otherwise add the value to the set and keep moving
+        seen.add(num)
+    # if we could traverse the whole list without finding a value already in our set, there are no duplicates
+    return False
