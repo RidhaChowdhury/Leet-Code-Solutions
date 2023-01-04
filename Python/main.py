@@ -38,3 +38,26 @@ def containsDuplicate(self, nums: List[int]) -> bool:
         seen.add(num)
     # if we could traverse the whole list without finding a value already in our set, there are no duplicates
     return False
+
+def isValid(self, s: str) -> bool:
+        # dictionary for matching openning brackets
+        matching_brackets = {
+            "}":"{",
+            ")":"(",
+            "]":"["
+        }
+
+        # make a bracket stack
+        stack = []
+
+        # traverse brackets
+        for bracket in s:
+            # if the bracket is openning put it onto the stack
+            if bracket in matching_brackets.values():
+                stack.append(bracket)
+            # if its closing see if the top of the stack is the corresponding type
+            elif len(stack) == 0 or stack.pop() != matching_brackets[bracket]:
+                return False
+
+        # if the stack is empty at the end we have no openning brackets left and pass
+        return not len(stack)
