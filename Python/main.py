@@ -61,3 +61,36 @@ def isValid(self, s: str) -> bool:
 
         # if the stack is empty at the end we have no openning brackets left and pass
         return not len(stack)
+
+class MinStack:
+
+    def __init__(self):
+        # have a list that will be treated like a stack
+        self.stack = []
+
+        # have a min stack
+        self.min_stack = []
+
+
+    def push(self, val: int) -> None:
+        # throw it on top of the stack
+        self.stack.append(val)
+
+        # see if min stack needs to be updated, if min_stack is empty have it always be min
+        if not self.min_stack or self.min_stack[-1] >= val:
+            self.min_stack.append(val)
+
+    def pop(self) -> None:
+        # pop the top value, check if value is at top of min_stack, pop both if thats the case
+        popped = self.stack.pop()
+        
+        # see if the min stack needs to be popped as well
+        if self.min_stack[-1] == popped:
+            self.min_stack.pop()
+
+    def top(self) -> int:
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        # return the top of the min stack
+        return self.min_stack[-1]
