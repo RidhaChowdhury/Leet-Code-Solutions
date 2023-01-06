@@ -189,3 +189,13 @@ def sockMerchant(n, ar):
         
 
     return total_pairs'''
+
+def miniMaxSum(arr):
+    total = sum(arr)
+    minimum = maximum = arr[0]
+    
+    for num in arr:
+        maximum = max(num, maximum)
+        minimum = min(num, minimum)
+        
+    print(str(total - maximum) + " " + str(total - minimum))
