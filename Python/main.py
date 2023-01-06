@@ -94,3 +94,74 @@ class MinStack:
     def getMin(self) -> int:
         # return the top of the min stack
         return self.min_stack[-1]
+
+
+def reverseList(self, head):
+        if not head or not head.next:
+            return head
+        
+        # have a reference to the last node, the current one, and a later
+        prev = head
+        current = head.next
+        prev.next = None
+        while current:
+            # store currents next in later
+            later = current.next
+            
+            # set current's next to previous
+            current.next = prev
+
+            # advance previous to current and current to later
+            prev = current
+            current = later
+
+        return prev
+
+        '''if not head: return
+
+        # hold on to front node
+        true_head = head
+        value_stack = []
+
+        current = head
+        # push node values onto stack
+        while current:
+            value_stack.append(current.val)
+            current = current.next
+
+        # go to first node and set its value to pop, move onto next, repeat
+        current = true_head
+        while current:
+            current.val = value_stack.pop()
+            current = current.next
+
+        return true_head'''
+        
+        '''if not head.next:
+            return head
+        self.reverseList(head.next).next = head
+        return head'''
+        
+        
+        '''# escape statement in the case where an empty head is given
+        if not head: return None
+        
+        # while there is a current node, remove it and push on to a stack making next node the target\
+        node_stack = []
+        current = head
+        
+        while current.next:
+            node_stack.append(current)
+            current = current.next
+
+        # pop through the stack setting next to the next popped value
+        new_head = current
+        while node_stack:
+            print(current.val)
+            current.next = node_stack.pop()
+            current = current.next
+
+        # set the old heads next to none
+        current.next = None
+
+        return new_head'''
