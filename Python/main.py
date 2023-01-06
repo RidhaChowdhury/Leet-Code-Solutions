@@ -1,3 +1,5 @@
+from collections import *
+
 def makeGood(self, s: str) -> str: #https://leetcode.com/problems/make-the-string-great/
         characters = []
         for character in s:
@@ -165,3 +167,25 @@ def reverseList(self, head):
         current.next = None
 
         return new_head'''
+
+def sockMerchant(n, ar):
+    total_pairs = 0
+    for socks in Counter(ar):
+        total_pairs += socks // 2
+    return total_pairs
+    
+    '''# have a hash map that stores how many of each type of sock we have
+    sock_drawer = {}
+    total_pairs = 0
+    
+    # insert each sock into the hashmap
+    for sock in ar:
+        # if we've already seen another one of these socks
+        if sock_drawer.get(sock, False) == True:
+            # mark down another pair and reset that sock space in the 'drawer'
+            total_pairs += 1
+            sock_drawer[sock] = False
+        else: sock_drawer[sock] = True
+        
+
+    return total_pairs'''
