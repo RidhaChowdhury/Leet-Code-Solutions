@@ -199,3 +199,20 @@ def miniMaxSum(arr):
         minimum = min(num, minimum)
         
     print(str(total - maximum) + " " + str(total - minimum))
+
+def timeConversion(s):
+    hour = s[:2]
+    am_or_pm = s[-2:]
+    min_sec = s[2:-2]
+    
+    # if the hour is 12 handle the edge case according to AM/PM
+    if(hour == "12"):
+        return "00" + min_sec if am_or_pm == "AM" else hour + min_sec
+        
+    # if its in the am return
+    if am_or_pm == "AM":
+        return hour + min_sec
+
+    # if its in the pm return it with hour + 12
+    else:
+        return str(int(hour) + 12) + min_sec
