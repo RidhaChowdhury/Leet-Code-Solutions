@@ -216,3 +216,20 @@ def timeConversion(s):
     # if its in the pm return it with hour + 12
     else:
         return str(int(hour) + 12) + min_sec
+
+def topKFrequent(self, nums: list[int], k: int) -> list[int]:
+        # get the frequency of each number via a dictionary
+        frequency = {}
+        for num in nums:
+            frequency[num] = 1 + frequency.get(num, 0)
+
+        # sort the listified dictionary by its values
+        sorted_frequencies = list(frequency.items())
+        sorted_frequencies.sort(key = lambda x: x[1]) # O(nlogn) => Tim sort, variant of mergesort
+
+        # pop the last k values out into an answer array
+        k_most_frequent = []
+        for i in range(k):
+            k_most_frequent.append(sorted_frequencies.pop()[0])
+
+        return k_most_frequent
