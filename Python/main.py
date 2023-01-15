@@ -233,3 +233,20 @@ def topKFrequent(self, nums: list[int], k: int) -> list[int]:
             k_most_frequent.append(sorted_frequencies.pop()[0])
 
         return k_most_frequent
+
+def productExceptSelf(self, nums: List[int]) -> List[int]:
+        # make two passes over the nums list, once from the front and once from the back
+        # while passing store the "running product," product of all values up to the point
+        running_product = 1
+        output = [1]*len(nums)
+        for i in range(len(nums)):
+            output[i] *= running_product
+            running_product *= nums[i]
+
+        # reset running product and make the same pass from the back of the list
+        running_product = 1
+        for i in range(len(nums) - 1, -1, -1):
+            output[i] *= running_product
+            running_product *= nums[i]
+
+        return output
