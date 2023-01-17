@@ -250,3 +250,35 @@ def productExceptSelf(self, nums: List[int]) -> List[int]:
             running_product *= nums[i]
 
         return output
+
+def isPalindrome(self, s: str) -> bool:
+        # check if a character is alpha numeric by seeing where it falls on the ascii table
+        def alpha_num(char):
+            return (    
+                ord(char) >= ord('A') and ord(char) <= ord('Z') # uppercase letter
+                or ord(char) >= ord('a') and ord(char) <= ord('z') # lowercase letter
+                or ord(char) <= ord('9') and ord(char) >= ord('0') # number letter
+            )             
+
+        # initialize a front and back pointer 
+        front, back = 0, len(s) - 1
+
+        # push the pointers together until they meet or pass
+        while(front < back):
+            # advance the pointers to the next alpha num characte
+            while front < back and not alpha_num(s[front]):
+                front += 1
+                
+            while front < back and not alpha_num(s[back]):
+                back -= 1
+                
+
+            # check if the pointers have the same value, take lower/upper into account
+            if s[front].lower() != s[back].lower():
+                return False
+
+            # push the pointers to the center
+            front += 1
+            back -= 1
+            
+        return True
