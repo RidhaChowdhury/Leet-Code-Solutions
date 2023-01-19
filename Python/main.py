@@ -282,3 +282,24 @@ def isPalindrome(self, s: str) -> bool:
             back -= 1
             
         return True
+
+def moveZeroes(self, nums: List[int]) -> None:
+        # handle edge case where there are no 0's
+        if 0 not in nums:
+            return nums
+
+        # have a tail and nose pointer
+        tail, nose = nums.index(0), nums.index(0) + 1
+
+        # loop until the nose reaches the end of the list, because then we've considered every number
+        while nose < len(nums):
+            # if the number at the nose is not 0 preform a swap
+            if nums[nose] != 0:
+                nums[tail], nums[nose] = nums[nose], nums[tail]
+                # advance the tail to maintain the potential 0 window between nose and tail
+                tail += 1
+
+            # always push the nose forward    
+            nose += 1
+        
+        return nums
