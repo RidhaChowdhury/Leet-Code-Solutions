@@ -283,6 +283,24 @@ def isPalindrome(self, s: str) -> bool:
             
         return True
 
+def minimumDifference(self, nums: List[int], k: int) -> int:
+        # handle the edge case where k is 1
+        if k == 1:
+            return 0
+        
+        # sort the list
+        nums.sort()
+        
+        # point at two vau
+        start_of_range = 0
+        minimum = nums[k - 1] - nums[0]
+        while start_of_range + k <= len(nums):
+            difference = nums[start_of_range + k - 1] - nums[start_of_range]
+            start_of_range += 1
+            minimum = min(minimum, difference)
+        
+        return minimum
+
 def moveZeroes(self, nums: List[int]) -> None:
         # handle edge case where there are no 0's
         if 0 not in nums:
