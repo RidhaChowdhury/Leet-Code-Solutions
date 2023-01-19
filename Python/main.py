@@ -251,6 +251,24 @@ def productExceptSelf(self, nums: List[int]) -> List[int]:
 
         return output
 
+def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        # have a pointer from the back
+        for big in range(len(numbers) - 1, 0, -1):
+            # see if the smallest number wouldnt bring you into range and skip if so
+            if numbers[big] + numbers[0] > target:
+                continue
+            # advance a pointer from the front seeing if any number adds to the target
+            for small in range(0, big):
+                # dont look at combinations once they start overshooting target
+                if numbers[big] + numbers[small] > target:
+                    break
+                # if we found the combination return it
+                elif numbers[big] + numbers[small] == target:
+                    return [small + 1, big + 1]
+
+            
+        return [0,0]
+
 def isPalindrome(self, s: str) -> bool:
         # check if a character is alpha numeric by seeing where it falls on the ascii table
         def alpha_num(char):
