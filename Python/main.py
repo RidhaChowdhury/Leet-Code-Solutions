@@ -339,3 +339,16 @@ def moveZeroes(self, nums: List[int]) -> None:
             nose += 1
         
         return nums
+
+def reverseString(self, s: List[str]) -> None:
+        # have a pointer for the left side of the string and right side
+        l, r = 0, len(s) - 1
+
+        # approach the center with both pointers, swapping the characters along the way
+        while l < r:
+            # preforming the swap
+            s[l], s[r] = s[r], s[l]
+            l += 1
+            r -= 1
+
+        return s
