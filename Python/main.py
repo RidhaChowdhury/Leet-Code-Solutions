@@ -352,3 +352,26 @@ def reverseString(self, s: List[str]) -> None:
             r -= 1
 
         return s
+
+def maxProfit(self, prices: List[int]) -> int:
+        # have a pointer to the cheapest value, this is the left of our window
+        # have a pointer which moves quick and evaluates if a new max sell has been found
+        cheapest = check = 0
+        
+        # have a variable which stores the max sell value
+        best_profit = 0
+
+        # scan through each day
+        for day, price in enumerate(prices):
+            # if the price we're looking at is lower than our minimum make that our cheapest value
+            if price < prices[cheapest]:
+                cheapest = day
+
+            else:
+                # compare the selling here to our max
+                sell = price - prices[cheapest]
+                # update our best_profit
+                best_profit = max(sell, best_profit)
+        
+        # return best profit
+        return best_profit
