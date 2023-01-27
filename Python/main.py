@@ -375,3 +375,33 @@ def maxProfit(self, prices: List[int]) -> int:
         
         # return best profit
         return best_profit
+
+def lengthOfLongestSubstring(self, s: str) -> int:
+				# handle edge cases
+        if len(s) < 2:
+            return len(s)
+        # have a back and a front pointer
+        back = front = 0
+        longest = 0
+
+        # a hashset of characters currently in the window
+        characters = set(s[0])
+
+        # loop until the front pointer reaches the end of the string
+        while front < len(s) - 1:
+            # push the front of the window forward
+            front += 1
+
+            # shift the back of the window up until the front character is no longer in the set
+            while s[front] in characters:
+                characters.remove(s[back])
+                back += 1
+            
+						# add the new character to the set
+            characters.add(s[front])
+
+            # otherwise compare if the new window is the longest
+            longest = max(longest, front - back + 1)
+
+        # return the longest value
+        return longest
