@@ -377,7 +377,7 @@ def maxProfit(self, prices: List[int]) -> int:
         return best_profit
 
 def lengthOfLongestSubstring(self, s: str) -> int:
-				# handle edge cases
+        # handle edge cases
         if len(s) < 2:
             return len(s)
         # have a back and a front pointer
@@ -405,3 +405,39 @@ def lengthOfLongestSubstring(self, s: str) -> int:
 
         # return the longest value
         return longest
+
+def calPoints(self, operations: List[str]) -> int:
+        # have a running sum and a stack of scores
+        total = 0
+        scores = []
+
+        # a helper function that adds new scores to the stack
+        def add(newScore: int):
+            scores.append(newScore)
+            nonlocal total
+            total += newScore
+
+        # a function that checks if the string is a number
+        def check_int(s):
+            if s[0] in ('-', '+'):
+                return s[1:].isdigit()
+            return s.isdigit()
+
+        # loop through the operations
+        for operation in operations:   
+            # if the operation is an integer just call add
+            if check_int(operation):
+                add(int(operation))
+
+            # if the operation is + perform add with the top two numbers
+            elif operation == "+":
+                add(scores[-1] + scores[-2])
+
+            # if the operation is D perform add with double the top number
+            elif operation == "D":
+                add(scores[-1] * 2)
+            # if the operation is C remove the top number from the stack and deduct it from the total
+            elif operation == "C":
+                total -= scores.pop()    
+                
+        return total
