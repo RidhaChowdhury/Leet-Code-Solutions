@@ -441,3 +441,35 @@ def calPoints(self, operations: List[str]) -> int:
                 total -= scores.pop()    
                 
         return total
+
+class StockSpanner:
+
+    def __init__(self):
+        # a list of price, span tuples
+        self.prices = []         
+
+    def next(self, price: int) -> int:
+        # if this is the first value just pop em on
+        if(not self.prices):
+            self.prices.append((price, 1))
+            return 1
+
+        # have a variable to keep track of what the span will be
+        current_span = 1
+
+        # while the value span index's back isn't larger than price add its span to current span
+        while self.prices[-current_span][0] <= price:
+            # if the next span would point us out of the list this spans the whole list
+            if current_span + self.prices[-current_span][1] > len(self.prices):
+                # push the price onto the stack with a span of the entire length and return that as span aswell
+                current_span = len(self.prices) + 1
+                self.prices.append((price, current_span))
+                return current_span
+            
+            # as long as the next current span' span would point us to somewhere still in the list keep searching
+            current_span += self.prices[-current_span][1]
+
+            
+        # push the price and span onto the stack and return the span
+        self.prices.append((price, current_span))
+        return current_span
