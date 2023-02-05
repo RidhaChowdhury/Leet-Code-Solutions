@@ -514,3 +514,36 @@ def decodeString(self, s: str) -> str:
 
 
         return result
+
+def asteroidCollision(self, asteroids: List[int]) -> List[int]:
+        # have a stack of remaining asteroids
+        remaining = []
+
+        # traverse asteroids
+        for asteroid in asteroids:
+            # if the asteroid is + just push it onto the stack, it wont collide with any previous asteroids
+            # if the stack is empty also just push onto the stack, theres nothing to collide with
+            if not remaining or asteroid > 0:
+                remaining.append(asteroid)
+
+            # if the asteroid is (-) loop collision evaluation
+            else:
+                # keep evaluating while there are right moving asteroids to collide with
+                while remaining and remaining[-1] > 0:
+                    # check if its an equivalent collision
+                    if(remaining[-1] == abs(asteroid)):
+                        remaining.pop()
+                        break
+                    # if the asteroid on top would destory the current asteroid, break
+                    if(remaining[-1] > abs(asteroid)):
+                        break
+                    # otherwise destroy right moving asteroid
+                    else:
+                        remaining.pop()
+
+                # our asteroid survived all the collisions so push it onto the stack
+                else:
+                    remaining.append(asteroid)
+
+        # return the remaining asteroids
+        return remaining
