@@ -473,3 +473,44 @@ class StockSpanner:
         # push the price and span onto the stack and return the span
         self.prices.append((price, current_span))
         return current_span
+
+def decodeString(self, s: str) -> str:
+        result = ""
+        k_codes = []
+        reading_number = False
+        # parse the string adding
+        for index, char in enumerate(s):
+            # add characters to the result string if the stack is empty
+            if not (char.isdigit() or char == '[' or char == ']'):
+                if not k_codes:
+                    result += char
+                else:
+                    k_codes[-1][1] += char
+
+            # when a number is found store the number and start reading the corresponding text
+            if char.isdigit():
+                # start reading the number
+                if not reading_number:
+                    k_codes.append([int(char), ""])
+                    reading_number = True
+                
+                else:
+                    k_codes[-1][0] *= 10
+                    k_codes[-1][0] += int(char)
+            
+            if char == '[':
+                reading_number = False
+
+            # once a closing bracket is found perform the string multiplication and append it to the value below it on the stack
+            if char == ']':
+                new_parse = k_codes[-1][0]*k_codes[-1][1]
+                k_codes.pop()
+                # if the stack is empty append it to the result string
+                if not k_codes:
+                    result += new_parse
+                # otherwise append it to the k_code under it in the stack, which it is nested in
+                else:
+                    k_codes[-1][1] += new_parse
+
+
+        return result
