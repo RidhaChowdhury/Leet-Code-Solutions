@@ -547,3 +547,23 @@ def asteroidCollision(self, asteroids: List[int]) -> List[int]:
 
         # return the remaining asteroids
         return remaining
+
+def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        answer = [0 for i in range(len(temperatures))]
+        temperature_history = []
+        
+        # go through each day
+        for day, temperature in enumerate(temperatures):
+            # start looking through the stack popping values and appending
+            while temperature_history and temperature_history[-1][1] < temperature:
+                popped_temperature = temperature_history.pop()
+                answer[popped_temperature[0]] = day - popped_temperature[0]
+            
+            # slap the new temperature on the stack
+            temperature_history.append((day, temperature))
+
+        # all the temperatures left over where a warmer day wasnt found
+        for day_temp in temperature_history:
+            answer[day_temp[0]] = 0
+        
+        return answer
