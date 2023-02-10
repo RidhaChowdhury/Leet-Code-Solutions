@@ -567,3 +567,18 @@ def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
             answer[day_temp[0]] = 0
         
         return answer
+
+def largestRectangleArea(self, heights: List[int]) -> int:
+        stack = []
+        largest = heights[0]
+        # brute force
+        for new_height in heights:
+            stack.append(new_height)
+            smallest = new_largest = new_height
+            for index, old_height in enumerate(reversed(stack)):
+                smallest = min(smallest, old_height)
+                new_largest = max(smallest * (index + 1), new_largest)
+
+            largest = max(new_largest, largest)
+        
+        return largest
