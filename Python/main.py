@@ -582,3 +582,34 @@ def largestRectangleArea(self, heights: List[int]) -> int:
             largest = max(new_largest, largest)
         
         return largest
+
+def hasCycle(self, head: Optional[ListNode]) -> bool:
+        seen = set()
+        while head is not None:
+            if head in seen:
+                return True
+            seen.add(head)
+            head = head.next
+
+        return False
+
+        '''# have a slow and fast pointer
+        slow = head
+        if head is not None:
+            fast = head.next
+        else:
+            return False
+        
+        # traverse while the slow and fast pointer are still not none
+        while (slow is not None) and (fast is not None):
+            # if we find that the fast pointer is the same as slow or slows next return true
+            if slow == fast or fast.next == slow:
+                return True
+            # if fast cant double jump without encountering none we know there is no cycle
+            if fast.next is None:
+                return False
+
+            slow = slow.next
+            fast = fast.next.next
+
+        return False'''
