@@ -613,3 +613,49 @@ def hasCycle(self, head: Optional[ListNode]) -> bool:
             fast = fast.next.next
 
         return False'''
+
+def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        # have a dummy answer list and a carry over value
+        answer = tail = ListNode()
+        carry = 0
+
+        # while there are still numbers in both lists continue adding
+        while l1 is not None and l2 is not None:
+            # add the values of the nodes and carry
+            sum = l1.val + l2.val + carry
+
+            # set the value of a new list node on tail to the sum % 10
+            tail.next = ListNode(sum % 10)
+
+            # set carry to the sum // 10 to get the second digit of the addition 
+            carry = sum // 10
+
+            # advance the list's
+            l1, l2, tail = l1.next, l2.next, tail.next
+
+
+        
+        # after what ever is remaining of either list can be attached to the end
+        extra_digits = adding = l1 if l2 is None else l2
+        while carry != 0 and adding is not None:
+            if adding.val == 9:
+                adding.val = 0
+            else:
+                adding.val += carry
+                carry = 0
+                break
+
+            # if we've reached a final digit
+            if adding.next is None:
+                adding.next = ListNode(carry)
+                carry = 0
+
+            adding = adding.next
+
+        # covers edge case
+        if carry != 0 and extra_digits is None:
+            tail.next = ListNode(carry)
+        else:
+            tail.next = extra_digits
+
+        return answer.next
