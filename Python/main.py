@@ -769,3 +769,27 @@ def reorderList(self, head: Optional[ListNode]) -> None:
             current.next = None
 
         return head
+
+def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    # have a current pointer and a value
+    current = head
+    value = -101
+
+    # traverse the linked list while current is not none
+    while current is not None:
+        # set value to currents value
+        value = current.val
+        
+        # make a similar seeking pointer set to current
+        seeking = current
+
+        # while the value of seeking is the same as value keep seeking
+        while seeking is not None and seeking.val == value:
+            seeking = seeking.next
+
+        # connect current to seeking and set current to seeking
+        current.next = seeking
+        current = current.next
+        
+    # return head
+    return head
