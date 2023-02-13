@@ -659,3 +659,60 @@ def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optio
             tail.next = extra_digits
 
         return answer.next
+
+class LRUCache:
+    # overall structure
+    # use hashmap in conjunction with linked list
+    # hashmap for storing key value pairs
+    # linked list for use history and to know what to pop when
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.map = {} # key, [value, history_freq]
+        self.most_recent = ListNode(-1)
+        self.least_recent = self.most_recent
+        
+
+    def get(self, key: int) -> int:
+        # try to get the value from the map
+        value = self.map[key][0] if key in self.map else -1
+        
+        # if we couldnt find it return -1
+        if value == -1:
+            return -1
+
+        # when you get something move it to the back of the linked list
+        self.most_recent.next = ListNode(key)
+        self.most_recent = self.most_recent.next
+
+        # and increase it's frequency
+        self.map[key][1] += 1
+
+        return value
+        
+        
+
+    def put(self, key: int, value: int) -> None:
+        # add it to the hashmap
+        if key in self.map:
+            self.map[key] = [value, self.map[key][1] + 1]
+        else:
+            self.map[key] = [value, 1]
+
+        # add it to the history
+        self.most_recent.next = ListNode(key)
+        self.most_recent = self.most_recent.next
+
+        if self.least_recent.value == -1:
+            self.least_recent = self.least_recent.next
+
+        print(key, value)
+        # if the hashmap exceeds capacity, start trying to clear from the map
+        while len(self.map) > self.capacity:
+            head_key = self.least_recent.value
+
+            self.map[head_key][1] -= 1
+
+            if self.map[head_key][1] == 0:
+                self.map.pop(head_key)
+            
+            self.least_recent = self.least_recent.next
