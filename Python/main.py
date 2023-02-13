@@ -742,3 +742,30 @@ def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNod
 
         # return the head
         return dummy.next
+
+def reorderList(self, head: Optional[ListNode]) -> None:
+        # make a dummy reversed list, while doing so find the length of it
+        dummy = ListNode(head.val)
+        
+        current = head.next
+        list_size = 0
+        while current:
+            new_node = ListNode(current.val, dummy)
+            dummy = new_node
+            current = current.next
+            list_size += 1
+        
+        # interlace the lists
+        current = head
+        for i in range(list_size//2):
+            print(current.val, current.next.val, dummy.val, dummy.next.val)
+            cur_next, dum_next = current.next, dummy.next
+            current.next, dummy.next = dummy, current.next
+            current, dummy = cur_next, dum_next
+        
+        if list_size % 2:
+            current.next.next = None
+        else:
+            current.next = None
+
+        return head
