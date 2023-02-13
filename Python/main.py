@@ -716,3 +716,29 @@ class LRUCache:
                 self.map.pop(head_key)
             
             self.least_recent = self.least_recent.next
+
+def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        # # handle the single node edge case
+        # if head.next is None:
+        #     return None
+
+        # utilize lead lag and a dummy pointer
+        lead = head
+        dummy = lag = ListNode(-1, head)
+        traversed = 0
+
+        # while the lead pointer isn't null
+        while lead is not None:
+            # jump lead forward in the linked list
+            lead = lead.next
+            traversed += 1
+
+            # if we've traversed enough without lag, bring it forward aswell
+            lag = lag.next if traversed > n else lag
+
+
+        # lag.next should be our n from end node
+        lag.next = lag.next.next
+
+        # return the head
+        return dummy.next
