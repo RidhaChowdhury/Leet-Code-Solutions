@@ -805,3 +805,18 @@ def guessNumber(self, n: int) -> int:
                 low = middle + 1
             else:
                 return middle
+
+def mySqrt(self, x: int) -> int:
+        low, high = 0, x
+        closest = 0
+        while low <= high:
+            middle = (low + high) // 2
+            square = middle * middle
+            if square > x: 
+                high = middle - 1
+            elif square < x:
+                low = middle + 1
+                closest = max(closest, middle)
+            else: 
+                return middle
+        return closest
