@@ -793,3 +793,15 @@ def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
         
     # return head
     return head
+
+def guessNumber(self, n: int) -> int:
+        low, high = 1, n
+        while low <= high:
+            middle = (low + high) // 2
+            direction = guess(middle)
+            if direction == -1:
+                high = middle - 1
+            elif direction == 1:
+                low = middle + 1
+            else:
+                return middle
