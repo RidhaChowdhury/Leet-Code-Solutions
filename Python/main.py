@@ -833,3 +833,27 @@ def search(self, nums: List[int], target: int) -> int:
                 return middle
             middle = (left + right) // 2
         return -1
+
+def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        # Strategy: implement a binary search with a search function to abstract the 2d element of the data
+        # dimensions of the array
+        m = len(matrix)
+        n = len(matrix[0])
+
+        # method for searching the matrix as if it was a 1d list
+        def search(index):
+            return matrix[index // n][index % n]
+
+        # the binary search
+        left, right = 0, m * n - 1
+
+        while left <= right:
+            middle = (left+right) // 2
+            value = search(middle)
+            if value < target:
+                left = middle + 1
+            elif value > target:
+                right = middle - 1
+            else:
+                return True
+        return False
