@@ -857,3 +857,29 @@ def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
             else:
                 return True
         return False
+
+def search(self, nums: List[int], target: int) -> int:
+    left, right = 0, len(nums) - 1
+    in_left = target >= nums[0]
+    while left <= right:
+        middle = (left + right) // 2
+        center_num = nums[middle]
+        # if its in the left half and we're looking at the right bring the right to middle
+        if in_left and center_num < nums[0]:
+            right = middle - 1
+            continue
+
+        # if its in the right half and we're looking at the left bring the left to middle
+        elif not in_left and center_num >= nums[0]:
+            left = middle + 1
+            continue
+
+        # otherwise do standard binary search behaviour
+        if center_num > target:
+            right = middle - 1
+        elif center_num < target:
+            left = middle + 1
+        else:
+            return middle
+
+    return -1
