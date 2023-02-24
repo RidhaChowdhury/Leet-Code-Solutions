@@ -883,3 +883,29 @@ def search(self, nums: List[int], target: int) -> int:
             return middle
 
     return -1
+
+def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        # find how long it would take for koko to eat 
+        def time_to_eat(speed):
+            time = 0
+            for pile in piles:
+                time += pile // speed
+                time += 1 if pile % speed != 0 else 0
+            return time
+        
+        slowest, fastest = 1, max(piles)
+        minimum = fastest
+        while slowest <= fastest:
+            # evaluate how long it would take for the middle speed
+            middle = (slowest + fastest) // 2
+            time = time_to_eat(middle)
+
+            # if koko can eat all the bananas at this middle speed within h chop out the faster speeds
+            if time <= h:
+                fastest = middle - 1
+                minimum = min(middle, minimum)
+            # otherwise koko needs to speed up
+            else:
+                slowest = middle + 1
+
+        return minimum
