@@ -909,3 +909,24 @@ def minEatingSpeed(self, piles: List[int], h: int) -> int:
                 slowest = middle + 1
 
         return minimum
+
+def findMin(self, nums: List[int]) -> int:
+        # left and right pointer
+        left, right = 0, len(nums) - 1
+
+        # handle edge case where its rotated n times
+        if nums[left] < nums[right]:
+            return nums[left]
+
+        # move the right pointer if middle is in the wrapped half otherwise move the left pointer
+        while left < right:
+            middle = (left + right) // 2
+            mid_val = nums[middle]
+            # number is in the wrapped half
+            if mid_val >= nums[0]:
+                left = middle + 1
+            # number is in the unwrapped half
+            else:
+                right = middle
+
+        return nums[left]
