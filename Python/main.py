@@ -936,3 +936,35 @@ def maxDepth(self, root: Optional[TreeNode]) -> int:
         return 0
     
     return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
+
+def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if root is None:
+            return []
+
+        if root.left is None and root.right is None:
+            return [[root.val]]
+
+        node_stack = [[root]]
+        current_depth, current_index = 0, 0
+        # traverse the node stack
+        while current_depth < len(node_stack) and node_stack[-1]:
+            # make a new stack for the next children
+            node_stack.append([])
+            while current_index < len(node_stack[current_depth]):
+                current_node = node_stack[current_depth][current_index]
+                node_stack[current_depth][current_index] = current_node.val
+                
+                # add each node's children to the next substack in the node stack
+                if current_node.left is not None:
+                    node_stack[current_depth + 1].append(current_node.left)
+                if current_node.right is not None:
+                    node_stack[current_depth + 1].append(current_node.right)
+                
+                current_index += 1
+
+            # reset pointers
+            current_index = 0
+            current_depth += 1
+
+        # remove the 
+        node_stack.pop()
