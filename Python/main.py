@@ -968,3 +968,20 @@ def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
 
         # remove the 
         node_stack.pop()
+
+def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+    # if we find a structural difference
+    if (p is None) ^ (q is None):
+        return False
+
+    # if the tree terminates here
+    elif p is None and q is None:
+        return True
+
+    # otherwise compare values
+    elif p.val == q.val:
+        # if the value is the same continue comparing
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+    else:
+        # otherwise return false
+        return False
