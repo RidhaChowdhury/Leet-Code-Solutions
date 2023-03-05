@@ -985,3 +985,26 @@ def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
     else:
         # otherwise return false
         return False
+    
+def rightSideView(self, root: Optional[TreeNode]) -> List[int]:        
+    def rightSideRecursive(root, current_level, next_level):
+        res = []
+
+        if root is None:
+            return res
+
+        # if we're at the next required level, since its preorder VRL we know this is the rightmost next_level node
+        if current_level == next_level:
+            res.append(root.val)
+            next_level += 1
+
+
+        # do the search down the left leg
+        right_results = rightSideRecursive(root.right, current_level + 1, next_level)
+        res.extend(right_results) # add its values to the result
+        next_level+= len(right_results) # however many we were able to get down the left leg advance the next desired level by that amount
+
+        res.extend(rightSideRecursive(root.left, current_level + 1, next_level)) # similarly for the left leg
+
+        return res
+    return rightSideRecursive(root, 1, 1)
