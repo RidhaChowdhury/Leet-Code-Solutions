@@ -1019,3 +1019,16 @@ def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -
     # they split
     else:
         return root
+    
+def goodNodes(self, root: TreeNode) -> int:
+    # have a helper method that keeps track of the max node passed while traversing
+    def goodNodesHelper(root, max):
+        if root is None:
+            return 0
+
+        if max > root.val:
+            return goodNodesHelper(root.left, max) + goodNodesHelper(root.right, max)
+        else:
+            return 1 + goodNodesHelper(root.left, root.val) + goodNodesHelper(root.right, root.val)
+
+    return goodNodesHelper(root, -float("inf"))
