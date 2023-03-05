@@ -1008,3 +1008,14 @@ def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
 
         return res
     return rightSideRecursive(root, 1, 1)
+
+def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    # going down the right path would not split the 
+    if (root.val > p.val) and (root.val > q.val) and root.right:
+        return self.lowestCommonAncestor(root.left, p, q)
+    # going down the left path
+    elif (root.val < p.val) and (root.val < q.val) and root.left:
+        return self.lowestCommonAncestor(root.right, p, q)
+    # they split
+    else:
+        return root
