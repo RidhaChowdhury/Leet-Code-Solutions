@@ -1032,3 +1032,27 @@ def goodNodes(self, root: TreeNode) -> int:
             return 1 + goodNodesHelper(root.left, root.val) + goodNodesHelper(root.right, root.val)
 
     return goodNodesHelper(root, -float("inf"))
+
+def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+    # handle nodeless edge case
+    if not root:
+        return TreeNode(val)
+
+    # initialize pointer values, they will be useful in the tree traversal
+    last = slot = root
+
+    #keep running down the BST while looking at nodes to discover the parent node
+    while slot:
+        last = slot
+        if slot.val > val:
+            slot = slot.left
+        else:
+            slot = slot.right
+        
+    # attach the value to the corresponding child of its discovered parent
+    if last.val > val:
+        last.left = TreeNode(val)
+    else:
+        last.right = TreeNode(val)
+
+    return root
