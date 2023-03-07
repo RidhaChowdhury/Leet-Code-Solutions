@@ -1085,3 +1085,21 @@ def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
 
 
     return new_head
+
+def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
+  levels = [[root]]
+  current_level = 0
+
+  while len(levels[current_level]) > 0:
+      # add a stage for the next level
+      levels.append([])
+      
+      for node in levels[current_level]:
+          if node.left:
+              levels[-1].append(node.left)
+          if node.right:
+              levels[-1].append(node.right)
+
+      current_level += 1
+
+  return levels[current_level - 1][0].val
