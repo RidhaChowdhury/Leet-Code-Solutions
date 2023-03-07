@@ -1056,3 +1056,32 @@ def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode
         last.right = TreeNode(val)
 
     return root
+
+def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    # handle edge case
+    if head is None or head.next is None:
+        return head
+
+    # a pair swapping utility
+    def swap_pair(first):
+        if not first:
+            return None, None
+
+        if not first.next:
+            return first, None
+    
+        second = first.next
+        first.next = second.next
+        second.next = first
+        return second, first
+
+    # swap the first pair
+    new_head, next_pair = swap_pair(head)
+
+    # while there is another pair to swap perform the swap
+    while next_pair:
+        # make the connection and swap the next pair
+        next_pair.next, next_pair = swap_pair(next_pair.next)
+
+
+    return new_head
