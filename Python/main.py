@@ -1103,3 +1103,12 @@ def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
       current_level += 1
 
   return levels[current_level - 1][0].val
+
+def findKthLargest(self, nums: List[int], k: int) -> int:
+        heap = [-num for num in nums]
+        heapify(heap)
+
+        for i in range(k - 1):
+            heappop(heap)
+
+        return -heappop(heap)
