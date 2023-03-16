@@ -1112,3 +1112,39 @@ def findKthLargest(self, nums: List[int], k: int) -> int:
             heappop(heap)
 
         return -heappop(heap)
+
+def islandPerimeter(self, grid: List[List[int]]) -> int:
+    computed_land = set()
+    height, width = len(grid), len(grid[0])
+
+    def out(x, y):
+        return y >= height or y < 0 or x < 0 or x >= width
+
+    def cellPerimiter(current):
+        # recursivley call cell perimiter on all neighboring cells other than the cell that called it, which is previous
+        x, y = current
+
+        # if this coordinate is not land or is out of bounds
+        if out(x, y) or grid[y][x] == 0:
+            return -1
+
+        computed_land.add(current)
+        # the different directions neighbors are in
+        directions = [(x + 1, y), (x, y + 1), (x - 1, y), (x, y - 1)]
+        perimiter = 0
+        
+        # compute the perimiter of each cell that has yet to be computed_land
+        for direction in directions:
+            if direction not in computed_land:
+                # add to the computed_land list
+                neighbor = cellPerimiter(direction)
+                perimiter += 1 if neighbor == -1 else neighbor
+
+        return perimiter
+
+    # Look for a land square iterativley
+    for y, row in enumerate(grid):
+        for x, cell in enumerate(row):
+            if cell == 1:
+                # Once one is found call cellPerimiter on that first land square and return its value
+                return cellPerimiter((x,y))
