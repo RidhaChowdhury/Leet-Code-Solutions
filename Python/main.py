@@ -1148,3 +1148,36 @@ def islandPerimeter(self, grid: List[List[int]]) -> int:
             if cell == 1:
                 # Once one is found call cellPerimiter on that first land square and return its value
                 return cellPerimiter((x,y))
+
+def numIslands(self, grid: List[List[str]]) -> int:
+  visited = set()
+  height, width = len(grid), len(grid[0])
+
+  def out(x, y):
+      return y >= height or y < 0 or x < 0 or x >= width
+
+  def island(current):
+      # recursivley call cell perimiter on all neighboring cells other than the cell that called it, which is previous
+      x, y = current
+
+      visited.add(current)
+      # if this coordinate is not land or is out of bounds
+      if out(x, y) or int(grid[y][x]) == 0:
+          return
+
+      # the different directions neighbors are in
+      directions = [(x + 1, y), (x, y + 1), (x - 1, y), (x, y - 1)]
+      
+      # compute the perimiter of each cell that has yet to be computed_land
+      for direction in directions:
+          if direction not in visited:
+              island(direction)
+
+  islands = 0
+  for y, row in enumerate(grid):
+      for x, cell in enumerate(row):
+          if int(cell) == 1 and ((x, y) not in visited):
+              island((x,y))
+              islands += 1
+
+  return islands
