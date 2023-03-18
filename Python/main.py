@@ -1181,3 +1181,32 @@ def numIslands(self, grid: List[List[str]]) -> int:
               islands += 1
 
   return islands
+
+def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        
+    def dfs(current):
+        x, y = current
+        if x < 0 or y < 0 or y >= len(grid) or x >= (len(grid[y])) or grid[y][x] == 0:
+            return 0
+
+        grid[y][x] = 0
+
+        area = 1
+        directions = ((x+1, y), (x, y + 1), (x - 1, y), (x, y - 1))
+        for direction in directions:
+            area += dfs(direction)
+        return area
+
+    # have a maximum value
+    max_area = 0
+
+
+    # iterative search for land
+    for y, row in enumerate(grid):
+        for x, cell in enumerate(row):
+            if cell == 1:
+                # call a dfs on the land
+                max_area = max(dfs((x,y)), max_area)
+
+
+    return max_area
