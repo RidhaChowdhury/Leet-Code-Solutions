@@ -1183,7 +1183,6 @@ def numIslands(self, grid: List[List[str]]) -> int:
   return islands
 
 def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        
     def dfs(current):
         x, y = current
         if x < 0 or y < 0 or y >= len(grid) or x >= (len(grid[y])) or grid[y][x] == 0:
@@ -1210,3 +1209,23 @@ def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
 
 
     return max_area
+
+def cloneGraph(self, node: 'Node') -> 'Node':
+  if node is None:
+      return None
+
+  if self.nodes[node.val] is not None:
+      return self.nodes[node.val]
+
+  # make the clone node
+  clone = Node(node.val)
+  self.nodes[clone.val] = clone
+
+  # loop through the base nodes neighbors
+  for neighbor in node.neighbors:
+      # if a neighbor doesnt exist create it
+      clone_neighbor = self.cloneGraph(neighbor)
+      self.nodes[clone.val].neighbors.append(clone_neighbor)
+
+  # make the connection then have all the neighbors make their connections
+  return self.nodes[node.val]
