@@ -1229,3 +1229,49 @@ def cloneGraph(self, node: 'Node') -> 'Node':
 
   # make the connection then have all the neighbors make their connections
   return self.nodes[node.val]
+
+def orangesRotting(self, grid: List[List[int]]) -> int:
+    # have a set of positions for both types of oranges
+    rotten = set()
+    fine = set()
+
+    # populate the sets with the correct data
+    for x, row in enumerate(grid):
+        for y, cell in enumerate(row):
+            if cell == 1:
+                fine.add((x, y))
+            elif cell == 2:
+                rotten.add((x,y))
+
+    # a set to ensure new oranges are rotting
+    delta = set()
+    delta.add(0)
+
+
+
+
+    # the time elapsed
+    time = 0
+
+    # while there are fresh oranges start rotting
+    # ensure there is a delta set
+    while len(fine) != 0 and len(delta) != 0:
+        # clear the delta set
+        delta.clear()
+
+        # rot neighbors
+        for x, y in rotten:
+            directions = ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1))
+            for direction in directions:
+                # the directions oranges can rot in
+                
+                # found a neighbor to rot
+                if direction in fine:
+                    delta.add(direction)
+
+        rotten.clear()
+        rotten.update(delta)
+        fine -= delta
+        time += 1
+
+    return -1 if len(delta) == 0 else time
