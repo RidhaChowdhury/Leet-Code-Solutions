@@ -1275,3 +1275,7 @@ def orangesRotting(self, grid: List[List[int]]) -> int:
         time += 1
 
     return -1 if len(delta) == 0 else time
+
+
+def myPow(self, x: float, n: int) -> float:
+    return x ** n
