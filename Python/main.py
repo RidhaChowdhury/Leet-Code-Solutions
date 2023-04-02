@@ -1279,3 +1279,24 @@ def orangesRotting(self, grid: List[List[int]]) -> int:
 
 def myPow(self, x: float, n: int) -> float:
     return x ** n
+
+def setZeroes(self, matrix: List[List[int]]) -> None:
+    """
+    Do not return anything, modify matrix in-place instead.
+    """
+    rows = set()
+    cols = set()
+
+    for y, row in enumerate(matrix):
+        for x, cell in enumerate(row):
+            if cell == 0:
+                rows.add(y)
+                cols.add(x)
+
+    for row in rows:
+        for x in range(len(matrix[row])):
+            matrix[row][x] = 0
+
+    for col in cols:
+        for y in range(len(matrix)):
+            matrix[y][col] = 0
