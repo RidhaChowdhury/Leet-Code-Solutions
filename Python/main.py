@@ -1300,3 +1300,14 @@ def setZeroes(self, matrix: List[List[int]]) -> None:
     for col in cols:
         for y in range(len(matrix)):
             matrix[y][col] = 0
+
+def subsets(self, nums: List[int]) -> List[List[int]]:
+    def subs(sets, moving_index):
+        new_sets = [None] * len(sets) * 2
+        for index, set in enumerate(sets):
+            new_sets[index * 2] = (set)
+            new_sets[index * 2 + 1] = (set + [nums[moving_index]])
+
+        return subs(new_sets, moving_index + 1) if moving_index < len(nums) - 1 else new_sets
+
+    return subs([[]], 0)
