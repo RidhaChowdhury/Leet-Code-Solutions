@@ -1311,3 +1311,25 @@ def subsets(self, nums: List[int]) -> List[List[int]]:
         return subs(new_sets, moving_index + 1) if moving_index < len(nums) - 1 else new_sets
 
     return subs([[]], 0)
+
+def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+    res = []
+    # dfs from a starting number
+    def dfs(start, choices):
+        # base case
+        if sum(start) == target:
+            res.append(start)
+        elif target - sum(start) < 2:
+            return
+
+        combos = [start for i in range(len(choices))]
+
+        # add each element to the decision tree
+        for index, choice in enumerate(choices):
+            dfs(start + [choice], choices[index::])
+
+    # loop through all numbers starting a dfs there
+    for index, element in enumerate(candidates):
+        dfs([element], candidates[index:])
+
+    return res
