@@ -1332,4 +1332,32 @@ def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
     for index, element in enumerate(candidates):
         dfs([element], candidates[index:])
 
-    return res
+def exist(self, board: List[List[str]], word: str) -> bool:
+    visited = set()
+    # helper function for seeing if the next letter in a word is on the board
+    def next_letter(word_left, pos):
+        # base case
+        if len(word_left) == 0:
+            return True
+
+        x, y = pos
+        visited.add((x,y))
+
+        neighbors = ((x + 1, y), (x, y + 1), (x - 1, y), (x, y - 1))
+
+        for nx, ny in neighbors:
+            if nx >= 0 and ny >= 0 and ny < len(board) and nx < len(board[0]):
+                if (board[ny][nx] == word_left[0]) and ((nx, ny)not in visited):
+                    if next_letter(word_left[1::], (nx, ny)):
+                        return True
+        visited.remove((x, y))
+
+            
+        return False
+
+    for y, row in enumerate(board):
+        for x, cell in enumerate(row):
+            if cell == word[0] and next_letter(word[1::], (x, y)):
+                return True
+
+    return False
