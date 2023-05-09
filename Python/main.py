@@ -1361,3 +1361,19 @@ def exist(self, board: List[List[str]], word: str) -> bool:
                 return True
 
     return False
+
+def letterCombinations(self, digits: str) -> List[str]:
+    letters = [[],['a','b','c'],['d','e','f'],['g','h','i'],['j','k','l'],['m','n','o'],['p','q','r','s'],['t','u','v'],['w','x','y','z']]
+    if len(digits) == 0:
+        return []
+    def helper(i, ans):
+        if i == len(digits):
+            return ans
+        updated = []
+        for sub in ans:
+            for letter in letters[int(digits[i]) - 1]:
+                new_sub = sub + letter
+                updated.append(new_sub)
+        return helper(i + 1, updated)
+    return helper(0, [""])
+
