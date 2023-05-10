@@ -1377,3 +1377,21 @@ def letterCombinations(self, digits: str) -> List[str]:
         return helper(i + 1, updated)
     return helper(0, [""])
 
+def permute(self, nums: List[int]) -> List[List[int]]:
+    permutations = []
+    def dfs(permutation, choices):
+        # base case
+        if len(choices) == 0:
+            permutations.append(permutation)
+
+        for choice in choices:
+            path_choices = choices.copy()
+            path_permutation = permutation.copy()
+
+            path_choices.remove(choice)
+            path_permutation.append(choice)
+            
+            dfs(path_permutation, path_choices)
+
+    dfs([], set(nums))
+    return permutations
