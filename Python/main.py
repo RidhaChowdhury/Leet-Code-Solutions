@@ -1395,3 +1395,18 @@ def permute(self, nums: List[int]) -> List[List[int]]:
 
     dfs([], set(nums))
     return permutations
+
+def fib(self, n: int) -> int:
+    memo = [-1] * (n + 1)
+    
+    def fibDP(num):
+        if num < 2:
+            return num
+        elif memo[num] > -1:
+            return memo[num]
+        else:
+            partialFib = fibDP(num - 1) + fibDP(num - 2)
+            memo[num] = partialFib
+            return partialFib
+
+    return fibDP(n)
