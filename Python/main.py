@@ -1410,3 +1410,15 @@ def fib(self, n: int) -> int:
             return partialFib
 
     return fibDP(n)
+
+def climbStairs(self, n: int) -> int:
+        def climb(num):
+            if num in steps:
+                return steps[num]
+
+            steps[num] = climb(num - 1) + climb(num - 2)
+            print(num, steps[num])
+            return steps[num]
+        steps = {0: 1, 1: 1}
+
+        return climb(n)
