@@ -1422,3 +1422,19 @@ def climbStairs(self, n: int) -> int:
         steps = {0: 1, 1: 1}
 
         return climb(n)
+
+def rob(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return nums[0]
+        elif len(nums) == 0:
+            return 0
+        def dp(i):
+            # base cases
+            if i in memo:
+                return memo[i]
+            
+            memo[i] = max(dp(i - 1), dp(i - 2) + nums[i])
+            return memo[i]
+        
+        memo = {0: nums[0], 1: max(nums[0], nums[1])}
+        return dp(len(nums) - 1)
