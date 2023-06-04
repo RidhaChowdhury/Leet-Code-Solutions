@@ -1438,3 +1438,14 @@ def rob(self, nums: List[int]) -> int:
         
         memo = {0: nums[0], 1: max(nums[0], nums[1])}
         return dp(len(nums) - 1)
+
+def tribonacci(self, n: int) -> int:
+        def calculate(state):
+            if state in cache:
+                return cache[state]
+
+            cache[state] = calculate(state - 1) + calculate(state - 2) + calculate(state - 3)
+            return cache[state]
+
+        cache = {0: 0, 1: 1, 2: 1}
+        return calculate(n)
