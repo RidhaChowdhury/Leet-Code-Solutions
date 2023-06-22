@@ -1449,3 +1449,43 @@ def tribonacci(self, n: int) -> int:
 
         cache = {0: 0, 1: 1, 2: 1}
         return calculate(n)
+
+def wallsAndGates(self, rooms: List[List[int]]) -> None:
+    """
+    Do not return anything, modify rooms in-place instead.
+    """
+    def inbounds(x, y):
+        return (x >= 0 and y >= 0 and y < len(rooms) and x < len(rooms[0]))
+
+    def get_neighbors(x, y):
+        return [(x + 1, y), (x - 1, y), (x, y - 1), (x, y + 1)]
+
+    empty = 2147483647
+    distance = 0
+    paths = deque([])
+    # Start at all the gates
+    for y, row in enumerate(rooms):
+        for x, cell in enumerate(row):
+            if cell == 0:
+                paths.extend(get_neighbors(x, y))
+
+    distance = 1
+    next_wave = deque([])
+    # BFS the gate
+    while len(paths) > 0:
+        # current path way being evaluated
+        x, y = paths.popleft()
+        # If it is empty, set it's distance to current distance 
+        if inbounds(x, y) and rooms[y][x] == 2147483647:
+            rooms[y][x] = distance
+
+            # Add its neighbors to the BFS
+            next_wave.extend(get_neighbors(x, y))
+
+        # if we've run out of paths add the next wave
+        if len(paths) == 0:
+            paths.extend(next_wave)
+            next_wave.clear()
+            distance += 1
+
+    return rooms
