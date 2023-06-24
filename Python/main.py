@@ -1489,3 +1489,40 @@ def wallsAndGates(self, rooms: List[List[int]]) -> None:
             distance += 1
 
     return rooms
+
+def validTree(self, n: int, edges: List[List[int]]) -> bool:
+    if len(edges) == 0:
+        return n == 1
+
+    # have a hashmap that where key is node value is connections
+    tree = {}
+    visited = set()
+
+    # build the map
+    for a, b in edges:
+        tree[a] = tree.get(a, set()) | {b}
+        tree[b] = tree.get(b, set()) | {a}
+
+    # loop detecting dfs algo
+    def dfs(node):
+        # check if we've been here before
+        if node in visited:
+            return False
+
+        # mark this node as visited
+        visited.add(node)
+
+        while len(tree[node]) != 0:
+            # jump to a random neighbor node and dfs from there
+            next_node = tree[node].pop()
+            # make sure we only move in a directed manner
+            tree[next_node].remove(node)
+
+            if dfs(next_node) == False:
+                return False
+
+        # true if none of the children detected a loop
+        return True
+
+    no_loop = dfs(edges[0][0])
+    return no_loop and len(visited) == n
